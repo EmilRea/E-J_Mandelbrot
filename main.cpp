@@ -1,6 +1,10 @@
 #include "ComplexPlane.h"
 
-int main()
+int main() 
 {
-  
+	// handle input
+
+	// update scene
+
+	// draw scene
 }
