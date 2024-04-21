@@ -13,7 +13,8 @@ const float BASE_ZOOM = 0.5;
 
 enum class State
 {
-
+	CALCULATING,
+	DISPLAYING
 };
 class ComplexPlane : public Drawable
 {
