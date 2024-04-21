@@ -2,19 +2,25 @@
 
 ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 {
-
+	m_pixel_size = { pixelWidth, pixelHeight };
+	m_aspectRatio = pixelHeight / pixelWidth;
+	m_plane_size = { BASE_WIDTH, BASE_HEIGHT * m_aspectRatio };
+	m_zoomCount = 0;
+	m_state = State::CALCULATING;
+	m_vArray.resize(pixelWidth * pixelHeight);
+	m_vArray.setPrimitiveType(Points);
 }
 void ComplexPlane::draw(RenderTarget& target, RenderStates states)const
 {
-
+	target.draw(m_vArray);
 }
 void ComplexPlane::zoomin()
 {
-
+	m_zoomCount--;
 }
 void ComplexPlane::zoomOut()
 {
-
+	m_zoomCount++;
 }
 void ComplexPlane::setCenter(Vector2i mousePixel)
 {
