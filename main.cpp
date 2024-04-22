@@ -2,10 +2,14 @@
 
 int main() 
 {
+	const int PIXEL_WIDTH = VideoMode::getDesktopMode().width;
+	const int PIXEL_HEIGHT = VideoMode::getDesktopMode().height;
 
-	VideoMode vm(1920, 1080);
+	VideoMode vm(PIXEL_WIDTH, PIXEL_HEIGHT);
 
 	RenderWindow window(vm, "Mandelbrot", Style::Default);
+
+	ComplexPlane complexPlane(PIXEL_WIDTH, PIXEL_HEIGHT);
 
 	while (window.isOpen())
 	{
@@ -21,7 +25,8 @@ int main()
             {
                 if (event.mouseButton.button == Mouse::Left)
                 {
-                    Vector2f complexCoord = complexPlane.mapPixelToCoords({ event.mouseButton.x, event.mouseButton.y });
+					Vector2i mousePixel{ event.mouseButton.x, event.mouseButton.y };
+					Vector2f complexCoord = complexPlane.mapPixelToCoords(mousePixel);
                     cout << "Clicked at complex coordinate: (" << complexCoord.x << ", " << complexCoord.y << ")" << endl;
                 }
             }
