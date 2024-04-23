@@ -10,7 +10,7 @@ int main()
 	displayFont.loadFromFile("./fonts/displayFont.ttf");
 	displayText.setFont(displayFont);
 
-	VideoMode vm(PIXEL_WIDTH, PIXEL_HEIGHT);
+	VideoMode vm = VideoMode(PIXEL_WIDTH, PIXEL_HEIGHT);
 
 	RenderWindow window(vm, "Mandelbrot", Style::Default);
 
@@ -27,21 +27,23 @@ int main()
 				window.close();
 			}
 			else if (event.type == Event::MouseButtonPressed)
-            {
+            		{
 				Vector2i mousePixel{ event.mouseButton.x, event.mouseButton.y };
 				cout << "Clicked at pixel coordinate: (" << mousePixel.x << ", " << mousePixel.y << ")" << endl;
 
-                if (event.mouseButton.button == Mouse::Left)
-                {                
-					complexPlane.setCenter(mousePixel);
+              			if (event.mouseButton.button == Mouse::Left)
+               		   	{
+					Vector2f center((float)(mousePixel.x), PIXEL_HEIGHT - (float)(mousePixel.y));
+					complexPlane.setCenter(center);
 					complexPlane.zoomIn();
-				}
-				if (event.mouseButton.button == Mouse::Right)
-				{
-					complexPlane.setCenter(mousePixel);
+			   	}
+			 	if (event.mouseButton.button == Mouse::Right)
+			 	{
+					Vector2f center((float)(mousePixel.x), PIXEL_HEIGHT - (float)(mousePixel.y));
+					complexPlane.setCenter(center);
 					complexPlane.zoomOut();
-				}
-            }
+			  	}
+            		}
 			else if (event.type == Event::MouseMoved)
 			{
 				Vector2i mousePixel{ event.mouseMove.x, event.mouseMove.y };
