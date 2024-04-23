@@ -10,7 +10,7 @@ int main()
 	displayFont.loadFromFile("./fonts/displayFont.ttf");
 	displayText.setFont(displayFont);
 
-	VideoMode vm = VideoMode(PIXEL_WIDTH, PIXEL_HEIGHT);
+	VideoMode vm(PIXEL_WIDTH, PIXEL_HEIGHT);
 
 	RenderWindow window(vm, "Mandelbrot", Style::Default);
 
