@@ -9,6 +9,8 @@ int main()
 	Text displayText;
 	displayFont.loadFromFile("./fonts/displayFont.ttf");
 	displayText.setFont(displayFont);
+	displayText.setPosition(10.f, 10.f);
+	displayText.setColor(Color::White);
 
 	VideoMode vm(PIXEL_WIDTH, PIXEL_HEIGHT);
 
@@ -44,6 +46,8 @@ int main()
 
 		// draw scene
 		window.clear();
+
+		complexPlane.draw();
 
 		window.display();
 	}
