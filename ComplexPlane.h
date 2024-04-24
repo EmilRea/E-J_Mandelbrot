@@ -1,3 +1,5 @@
+#pragma once
+
 #include <iostream>
 #include <cmath>
 #include <sstream>
@@ -22,7 +24,7 @@ class ComplexPlane : public Drawable
 public:
 	ComplexPlane(int pixelWidth, int pixelHeight);
 		void draw(RenderTarget& target, RenderStates states)const;
-		void zoomin();
+		void zoomIn();
 		void zoomOut();
 		void setCenter(Vector2i mousePixel);
 		void setMouseLocation(Vector2i mousePixel);

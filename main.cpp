@@ -2,8 +2,8 @@
 
 int main() 
 {
-	const int PIXEL_WIDTH = VideoMode::getDesktopMode().width;
-	const int PIXEL_HEIGHT = VideoMode::getDesktopMode().height;
+	const int PIXEL_WIDTH = VideoMode::getDesktopMode().width / 2;
+	const int PIXEL_HEIGHT = VideoMode::getDesktopMode().height / 2;
 
 	Font displayFont;
 	Text displayText;
@@ -29,13 +29,28 @@ int main()
 				window.close();
 			}
 			else if (event.type == Event::MouseButtonPressed)
-            {
-                if (event.mouseButton.button == Mouse::Left)
-                {
-					Vector2i mousePixel{ event.mouseButton.x, event.mouseButton.y };
-                    cout << "Clicked at complex coordinate: (" << mousePixel.x << ", " << mousePixel.y << ")" << endl;
-                }
-            }
+            		{
+				Vector2i mousePixel{ event.mouseButton.x, event.mouseButton.y };
+				cout << "Clicked at pixel coordinate: (" << mousePixel.x << ", " << mousePixel.y << ")" << endl;
+
+              			if (event.mouseButton.button == Mouse::Left)
+               		   	{
+					Vector2f center((float)(mousePixel.x), PIXEL_HEIGHT - (float)(mousePixel.y));
+					complexPlane.setCenter(center);
+					complexPlane.zoomIn();
+			   	}
+			 	if (event.mouseButton.button == Mouse::Right)
+			 	{
+					Vector2f center((float)(mousePixel.x), PIXEL_HEIGHT - (float)(mousePixel.y));
+					complexPlane.setCenter(center);
+					complexPlane.zoomOut();
+			  	}
+            		}
+			else if (event.type == Event::MouseMoved)
+			{
+				Vector2i mousePixel{ event.mouseMove.x, event.mouseMove.y };
+				complexPlane.setMouseLocation(mousePixel);
+			}
 		}
 		if (Keyboard::isKeyPressed(Keyboard::Escape))
 		{
@@ -43,12 +58,15 @@ int main()
 		}
 		// update scene
 		complexPlane.updateRender();
+		complexPlane.loadText(displayText);
 
 		// draw scene
 		window.clear();
-
-		complexPlane.draw();
-
+		window.draw(complexPlane);
+		window.draw(displayText);
 		window.display();
+
 	}
+
+	return 0;
 }
