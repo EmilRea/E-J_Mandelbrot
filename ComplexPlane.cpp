@@ -4,7 +4,7 @@ ComplexPlane::ComplexPlane(int pixelWidth, int pixelHeight)
 {
 	m_pixel_size = { pixelWidth, pixelHeight };
 	m_aspectRatio = (float)pixelHeight / (float)pixelWidth;
-	m_plane_center = { 0, 0 };
+	m_plane_center = { 0, 0 * -1};
 	m_plane_size = { BASE_WIDTH, BASE_HEIGHT * m_aspectRatio };
 	m_zoomCount = 0;
 	m_state = State::CALCULATING;
@@ -48,9 +48,15 @@ void ComplexPlane::loadText(Text& text)
 	//add title
 	displayStrm << "Mandelbolt Set\n";
 	//add center
-	displayStrm << "Center: (" << m_plane_center.x << ", " << m_plane_center.y * -1 << ")" << endl;
+	float yCenter = m_plane_center.y;
+	if (yCenter != 0) yCenter *= -1;
+
+	displayStrm << "Center: (" << m_plane_center.x << ", " << yCenter << ")" << endl;
 	//add cursor
-	displayStrm << "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y * -1 << ")" << endl;
+	float yCursor = m_mouseLocation.y;
+	if (yCursor != 0) yCursor *= -1;
+
+	displayStrm << "Cursor: (" << m_mouseLocation.x << ", " << yCursor << ")" << endl;
 	// instructions
 	displayStrm << "Left-click to Zoom in" << endl;
 	displayStrm << "Right-click to Zoom out" << endl;
