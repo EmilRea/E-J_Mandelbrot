@@ -27,8 +27,8 @@ void ComplexPlane::zoomIn()
 void ComplexPlane::zoomOut()
 {
 	m_zoomCount--;
-	float zoomX = BASE_WIDTH * (pow(BASE_ZOOM, m_zoomCount));
-	float zoomY = BASE_HEIGHT * m_aspectRatio * (pow(BASE_ZOOM, m_zoomCount));
+	float zoomX = BASE_WIDTH * (float)(pow(BASE_ZOOM, m_zoomCount));
+	float zoomY = BASE_HEIGHT * m_aspectRatio * (float)(pow(BASE_ZOOM, m_zoomCount));
 	m_plane_size = { zoomX, zoomY };
 	m_state = State::CALCULATING;
 }
@@ -156,8 +156,10 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 }
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
 {
-    float x = ((mousePixel.x - 0) / (float(m_pixel_size.x))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.x);
-    float y = ((mousePixel.y - m_pixel_size.y) / (float(0 - m_pixel_size.y))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.y);
+
+	float x = (((mousePixel.x - 0) / (float(m_pixel_size.x))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.x) / 2.0f) * -1.0f;
+	float y = (((mousePixel.y - m_pixel_size.y) / (float(0 - m_pixel_size.y))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.y) / -2.0f) + 2.0f;
+
 
 	return { x, y };
 
