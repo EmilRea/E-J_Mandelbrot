@@ -79,7 +79,18 @@ void ComplexPlane::updateRender()
 }
 int ComplexPlane::countIterations(Vector2f coord)
 {
-	return abs(coord.x) + abs(coord.y);
+	//return abs(coord.x) + abs(coord.y);
+	Vector2f z = { 0, 0 };
+	int n = 0;
+	while (z.x * z.x + z.y * z.y <= 4 && n < MAX_ITER)
+	{
+		float xtemp = z.x * z.x - z.y * z.y + coord.x;
+		z.y = 2 * z.x * z.y + coord.y;
+		z.x = xtemp;
+		n++;
+	}
+	return n;
+
 }
 void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 {
@@ -157,8 +168,8 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 Vector2f ComplexPlane::mapPixelToCoords(Vector2i mousePixel)
 {
 
-	float x = (((mousePixel.x - 0) / (float(m_pixel_size.x))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.x) / 2.0f) * -1.0f;
-	float y = (((mousePixel.y - m_pixel_size.y) / (float(0 - m_pixel_size.y))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.y) / -2.0f) + 2.0f;
+	float x = (((mousePixel.x - 0) / (float(m_pixel_size.x))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.x) / 2.0f);
+	float y = (((mousePixel.y - m_pixel_size.y) / (float(0 - m_pixel_size.y))) * (m_plane_size.y - m_plane_size.x) + (m_plane_size.y) / 2.0f + 2);
 
 
 	return { x, y };
