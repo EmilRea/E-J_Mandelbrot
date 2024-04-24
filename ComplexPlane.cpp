@@ -48,9 +48,9 @@ void ComplexPlane::loadText(Text& text)
 	//add title
 	displayStrm << "Mandelbolt Set\n";
 	//add center
-	displayStrm << "Center: (" << m_plane_center.x << ", " << m_plane_center.y << ")" << endl;
+	displayStrm << "Center: (" << m_plane_center.x << ", " << m_plane_center.y * -1 << ")" << endl;
 	//add cursor
-	displayStrm << "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y << ")" << endl;
+	displayStrm << "Cursor: (" << m_mouseLocation.x << ", " << m_mouseLocation.y * -1 << ")" << endl;
 	// instructions
 	displayStrm << "Left-click to Zoom in" << endl;
 	displayStrm << "Right-click to Zoom out" << endl;
