@@ -105,7 +105,7 @@ void ComplexPlane::iterationsToRGB(size_t count, Uint8& r, Uint8& g, Uint8& b)
 	}
 	else
 	{
-		float hue = static_cast<float>(count % 256) / 255.0f;
+		float hue = static_cast<float>(count % 50) / 49.0f;
 		float saturation = 1.0f;
 		float lightness = 0.5f;
 
