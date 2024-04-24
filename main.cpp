@@ -1,9 +1,9 @@
 #include "ComplexPlane.h"
 
-int main() 
+int main()
 {
 	const int PIXEL_WIDTH = VideoMode::getDesktopMode().width / 2;
-	const int PIXEL_HEIGHT = VideoMode::getDesktopMode().height/ 2;
+	const int PIXEL_HEIGHT = VideoMode::getDesktopMode().height / 2;
 
 	Font displayFont;
 	Text displayText;
@@ -30,23 +30,25 @@ int main()
 				window.close();
 			}
 			else if (event.type == Event::MouseButtonPressed)
-            {
+			{
 				Vector2i mousePixel{ event.mouseButton.x, event.mouseButton.y };
 				cout << "Clicked at pixel coordinate: (" << mousePixel.x << ", " << mousePixel.y << ")" << endl;
 
-              	if (event.mouseButton.button == Mouse::Left)
+				if (event.mouseButton.button == Mouse::Left)
 				{
 					Vector2i center((mousePixel.x), (mousePixel.y));
-					complexPlane.setCenter(center);
 					complexPlane.zoomIn();
-			   	}
-			 	if (event.mouseButton.button == Mouse::Right)
-			 	{
-					Vector2i center((mousePixel.x), (mousePixel.y));
 					complexPlane.setCenter(center);
+
+				}
+				if (event.mouseButton.button == Mouse::Right)
+				{
+					Vector2i center((mousePixel.x), (mousePixel.y));
 					complexPlane.zoomOut();
-			  	}
-            }
+					complexPlane.setCenter(center);
+
+				}
+			}
 			else if (event.type == Event::MouseMoved)
 			{
 				Vector2i mousePixel{ event.mouseMove.x, event.mouseMove.y };
